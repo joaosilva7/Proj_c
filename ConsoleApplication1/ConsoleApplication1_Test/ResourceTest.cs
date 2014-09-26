@@ -47,5 +47,38 @@ namespace ConsoleApplication1_Test
 
         }
 
+        [TestMethod]
+        public void GetHolidaysDays()
+        {
+            SetUp();
+            DateTime start = DateTime.Today.AddDays(0);
+            DateTime finish = DateTime.Today.AddDays(5);
+
+            Assert.AreEqual(5, employee.GetHolidayDays(start, finish));
+
+        }
+
+        [TestMethod]
+        public void GetSickDays()
+        {
+            SetUp();
+            DateTime start = DateTime.Today.AddDays(0);
+            DateTime finish = DateTime.Today.AddDays(5);
+
+            Assert.AreEqual(5, employee.GetSickDays(start, finish));
+
+        }
+
+        [TestMethod]
+        public void GetAbsenceDays()
+        {
+            SetUp();
+            DateTime start = DateTime.Today.AddDays(0);
+            DateTime finish = DateTime.Today.AddDays(5);
+
+            Assert.AreEqual(5, employee.GetAbsenceDays(start, finish));
+
+        }
+
     }
 }
