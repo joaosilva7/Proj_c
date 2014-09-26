@@ -17,16 +17,20 @@ namespace ConsoleApplication1
         public IOStreamReader(string filename)
         {
             _filename = filename;
-            serializer = new XmlSerializer(typeof(ResourceManagement));
-
+            
         }
 
         public void Save (ResourceManagement rm)
         {
-            using (TextWriter writer = new StreamWriter(_filename)) 
+            
             {
-                serializer.Serialize(writer, rm);
+                using (TextWriter writer = new StreamWriter(_filename))
+                {
+                    serializer = new XmlSerializer(typeof(ResourceManagement));
+                    serializer.Serialize(writer, rm);
+                }
             }
+
         }
 
         public ResourceManagement Load()
@@ -41,8 +45,9 @@ namespace ConsoleApplication1
         }
 
 
-        public void createDB()
+        public ResourceManagement createDB()
         {
+            ResourceManagement rm = new ResourceManagement();
             int j = 1;
             List<Manager> ManagersList = new List<Manager>();
             List<Employee> EmployeesList = new List<Employee>();
@@ -60,6 +65,7 @@ namespace ConsoleApplication1
                 j++;
                 Console.WriteLine("manager" + m._id_Resource + m._name);
                 ManagersList.Add(m);
+                rm.AddResource(m);
             }
 
 
@@ -71,6 +77,7 @@ namespace ConsoleApplication1
 
                 ManagersList.ElementAt(new Random().Next(numManagers)).EmployeesList.Add(e);
                     j++;
+                    rm.AddResource(e);
             }
 
             foreach (var manager in ManagersList)
@@ -94,6 +101,8 @@ namespace ConsoleApplication1
                     }
                 }
             }
+            return rm;
+        
         }
     }
 }

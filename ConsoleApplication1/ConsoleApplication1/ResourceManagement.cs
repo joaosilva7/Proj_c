@@ -5,20 +5,27 @@ using System.Text;
 
 namespace ConsoleApplication1
 {
-    public  class ResourceManagement
+    [Serializable]
+    public class ResourceManagement
     {
-        int IdCount {get; set;}
-        Dictionary<int,Resource> Resources {get; set;}
 
+        int IdCount {get; set;}
+        public List<ResourcesType> Resources; 
+
+      
         public ResourceManagement()
         {
-            Resources = new Dictionary<int,Resource>();
-        
+            Resources = new List<ResourcesType>();
         }
 
-        private void AddResource(Resource R)
+        public void AddResource(Resource R)
         {
-            Resources.Add(IdCount, R);
+            ResourcesType Rt = new ResourcesType();
+            Rt.id = IdCount;
+            Rt.resource = R;
+
+            Resources.Add(Rt);
+            Increment();
         }
 
         public int Increment()
@@ -30,17 +37,23 @@ namespace ConsoleApplication1
 
         public IEnumerable<Tuple<Resource, int>> GetWorkingTimeByMinutes(DateTime date)
         {
-            foreach (var resource in Resources)
+            foreach (var res in Resources)
             {
-               int time = resource.Value.Calendar
+               int time = res.resource.Calendar
                     .FilterBy((t) => t.Allocated_Start.Date == date.Date && 
                      t.GetType().Name == "Work")
                     .Sum((t) => t.Duration().Minutes);
 
-               yield return new Tuple<Resource, int>(resource.Value,time);
+               yield return new Tuple<Resource, int>(res.resource,time);
             }      
         }
         
 
     }
+   
+    public class ResourcesType
+        {
+           public int id;
+           public Resource resource;
+        }
 }

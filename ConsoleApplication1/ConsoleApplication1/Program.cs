@@ -9,15 +9,19 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-          
+            
+            ResourceManagement rm = new ResourceManagement();
+            
             IOStreamReader sr = new IOStreamReader("dbinitial.xml");
-            sr.createDB();
-            sr.Load();
            
+            // sr.Load();
+            
             
             Console.WriteLine("Criou a DB");
 
-            ResourceManagement res = new ResourceManagement();
+        
+            rm = sr.createDB();
+            sr.Save(rm);
         }
     }
 }
