@@ -10,21 +10,18 @@ namespace ConsoleApplication1
     {
 
         int IdCount {get; set;}
-        public List<ResourcesType> Resources; 
+        public List<Resource> Resources; 
 
       
         public ResourceManagement()
         {
-            Resources = new List<ResourcesType>();
+            Resources = new List<Resource>();
         }
 
         public void AddResource(Resource R)
         {
-            ResourcesType Rt = new ResourcesType();
-            Rt.id = IdCount;
-            Rt.resource = R;
 
-            Resources.Add(Rt);
+            Resources.Add(R);
             Increment();
         }
 
@@ -39,21 +36,16 @@ namespace ConsoleApplication1
         {
             foreach (var res in Resources)
             {
-               int time = res.resource.Calendar
+               int time = res.Calendar
                     .FilterBy((t) => t.Allocated_Start.Date == date.Date && 
                      t.GetType().Name == "Work")
                     .Sum((t) => t.Duration().Minutes);
 
-               yield return new Tuple<Resource, int>(res.resource,time);
+               yield return new Tuple<Resource, int>(res,time);
             }      
         }
         
 
     }
    
-    public class ResourcesType
-        {
-           public int id;
-           public Resource resource;
-        }
 }

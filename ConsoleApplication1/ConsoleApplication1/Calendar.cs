@@ -9,9 +9,12 @@ namespace ConsoleApplication1
    public class Calendar
     {
 
-      public  SortedSet<Slot> slots = new SortedSet<Slot>(new DateComparer());
+        public SortedSet<Slot> slots { get; set; }
 
-      public Calendar() { }
+        public Calendar() 
+        { 
+            slots = new SortedSet<Slot>(new DateComparer());
+        }
 
         public IEnumerable<Slot> FilterBy(Func<Slot,bool> Query)
         {
@@ -22,6 +25,12 @@ namespace ConsoleApplication1
         public IEnumerable<Slot> FilterByType(string type)
         {
             return FilterBy((t) => t.GetType().Name == type);
+        }
+
+        public IEnumerable<Slot> FilterByDate(DateTime date_start, DateTime date_finish)
+        {
+            return FilterBy((t) => t.Allocated_Start.Date >= date_start.Date &&
+                            t.Allocated_Finish.Date <= date_finish.Date);
         }
 
         public IEnumerable<Slot> FilterByDateAndType(DateTime date_start, DateTime date_finish, string type)

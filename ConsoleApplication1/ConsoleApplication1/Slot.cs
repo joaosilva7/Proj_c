@@ -9,7 +9,7 @@ namespace ConsoleApplication1
     {
         public DateTime Allocated_Start { get; set; }
         public DateTime Allocated_Finish { get; set; }
-        String Description { get; set; }
+        public String Description { get; set; }
 
         public Slot()
         {

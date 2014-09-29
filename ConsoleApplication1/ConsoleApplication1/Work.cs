@@ -7,8 +7,8 @@ namespace ConsoleApplication1
 {
     public class Work : Slot
     {
-        DateTime Done_Start { get; set; }
-        DateTime Done_Finish { get; set; }
+        public DateTime Done_Start { get; set; }
+        public DateTime Done_Finish { get; set; }
 
         public Work()
         {
