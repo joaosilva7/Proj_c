@@ -14,6 +14,8 @@ namespace ConsoleApplication1
               EmployeesList = new List<Employee>();
         }
 
+        
+
         public Employee GetEmployee(int IdEmployee)
         {
             foreach (var Employee in EmployeesList)
