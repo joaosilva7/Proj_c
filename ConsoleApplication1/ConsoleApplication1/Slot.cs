@@ -11,6 +11,10 @@ namespace ConsoleApplication1
         public DateTime Allocated_Finish { get; set; }
         String Description { get; set; }
 
+        public Slot()
+        {
+        }
+
         public Slot(DateTime Start, DateTime Finish, String Description = null)
         {
             this.Allocated_Start = Start;

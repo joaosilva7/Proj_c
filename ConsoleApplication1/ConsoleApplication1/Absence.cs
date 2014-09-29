@@ -5,18 +5,21 @@ using System.Text;
 
 namespace ConsoleApplication1
 {
-    class Absence : Slot
+   public class Absence : Slot
     {
         public enum AbsenceType {Holiday, Sick, NotJustified}
-        AbsenceType _type{get; set;}
-        
+        public AbsenceType _type{get; set;}
+
+
+        public Absence() { }
 
         public Absence(DateTime Start, DateTime Finish, AbsenceType type, String Description = null)
             : base(Start, Finish, Description)
         {
             _type = type;
         }
-    
 
+       
+   
     }
 }

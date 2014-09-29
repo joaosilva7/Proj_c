@@ -12,6 +12,8 @@ namespace ConsoleApplication1
         public int _numHours;       
         public Calendar Calendar { get; set; }
 
+        public Resource() { }
+
         public Resource(int idResource, string name, int numHours) 
         {
             _id_Resource = idResource;
@@ -22,17 +24,20 @@ namespace ConsoleApplication1
 
         public int GetAbsenceDays(DateTime start, DateTime finish)
         {
-            return Calendar.GetDaysByType(start, finish, "Absence");
+            return Calendar.FilterAbsenceByType(Absence.AbsenceType.NotJustified, start, finish)
+                .Sum((t) => t.Duration().Days);
         }
 
         public int GetHolidayDays(DateTime start, DateTime finish)
         {
-            return Calendar.GetDaysByType(start, finish, "Holiday");
+            return Calendar.FilterAbsenceByType(Absence.AbsenceType.Holiday, start, finish)
+                .Sum((t) => t.Duration().Days);
         }
 
         public int GetSickDays(DateTime start, DateTime finish)
         {
-            return Calendar.GetDaysByType(start, finish, "Sick");
+            return Calendar.FilterAbsenceByType(Absence.AbsenceType.Sick, start, finish)
+                .Sum((t) => t.Duration().Days);
         }
 
         public int GetWorkDays(DateTime start, DateTime finish)
@@ -59,5 +64,6 @@ namespace ConsoleApplication1
         {
             return Calendar.GetHoursByType(start, finish, "Work");
         }
+
     }
 }
