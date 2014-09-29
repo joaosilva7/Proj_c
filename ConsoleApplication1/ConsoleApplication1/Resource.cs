@@ -64,6 +64,39 @@ namespace ConsoleApplication1
         {
             return Calendar.GetHoursByType(start, finish, "Work");
         }
+        
+        public void AddSlot(int type, string initialDT, string finalDT)
+        {
+            DateTime dti = PrepareDate(initialDT);
+            DateTime dtf = PrepareDate(finalDT);
+            Slot slot;
+            switch(id){
+                case 1: 
+                    slot = new Work(dti, dtf);
+                    Calendar.slots.Add(slot);
+                    break;
+                case 2: 
+                    slot = new Absence(dti, dtf, Absence.AbsenceType.Holiday);
+                    Calendar.slots.Add(slot);
+                    break;
+                case 3: 
+                    slot = new Absence(dti, dtf, Absence.AbsenceType.Sick);
+                    Calendar.slots.Add(slot);
+                    break;
+                case 4: 
+                    slot = new Absence(dti, dtf, Absence.AbsenceType.NotJustified);
+                    Calendar.slots.Add(slot);
+                    break;
 
+            }
+
+        }
+
+        public DateTime PrepareDate(string date)
+        {
+            string[] values = date.Split(new char[] {','});
+            DateTime dt = new DateTime(Convert.ToInt32(values[0]),Convert.ToInt32(values[1]),Convert.ToInt32(values[2]),Convert.ToInt32(values[3]), 0, 0);
+            return dt;
+        }
     }
 }
