@@ -60,6 +60,7 @@ namespace ConsoleApplication1
             int numEmployees = 50;
             Random rnd = new Random();
             int a;
+            
             for (int i = 0; i < numManagers; i++)
             {
                 a = rnd.Next(5);
@@ -67,7 +68,7 @@ namespace ConsoleApplication1
                 j++;
                 Console.WriteLine("manager" + m._id_Resource + m._name);
                 ManagersList.Add(m);
-                rm.AddResource(m);
+          
             }
 
 
@@ -76,10 +77,15 @@ namespace ConsoleApplication1
                 a = rnd.Next(5);
                 Employee e = new Employee(j, Names[a], 8);
                 Console.WriteLine("employee" + e._id_Resource + e._name);
+                a = rnd.Next(numManagers);
+                Manager man = ManagersList.ElementAt(a);
+                
+                man.EmployeesList.Add(e);
+             //   Console.Write(" teste man: employeeId: {0}, EmployeeName: {1}", man.EmployeesList.ElementAt(0)._id_Resource, man.EmployeesList.ElementAt(0)._name);
 
-                ManagersList.ElementAt(new Random().Next(numManagers)).EmployeesList.Add(e);
                     j++;
-                    rm.AddResource(e);
+                    rm.AddResource(e._id_Resource, e);
+                    rm.Increment();
             }
 
             foreach (var manager in ManagersList)
@@ -101,10 +107,22 @@ namespace ConsoleApplication1
                         manager.Calendar.slots.Add(slot2);
                         employee.Calendar.slots.Add(slot2);
                     }
+
                 }
+                rm.AddResource(manager._id_Resource, manager);
+                rm.Increment();
             }
             return rm;
         
         }
+
+        public void ListAllResources(IEnumerable<Resource> ListRes)
+        {
+            foreach (var resource in ListRes)
+            {
+                Console.WriteLine(" ID: {0}\t\tName: {1}", resource._id_Resource, resource._name);
+            }
+        }
+
     }
 }
