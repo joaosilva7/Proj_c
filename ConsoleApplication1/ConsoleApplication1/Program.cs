@@ -76,15 +76,32 @@ namespace ConsoleApplication1
                                 Console.WriteLine("Insert Final Date by this format: yy,mm,dd,hh");
                                 String dt2 = Console.ReadLine();
                                 emp.AddSlot(type, dt1, dt2);
-                                Console.WriteLine("Slot added successfully...");
+                                Console.WriteLine("Slot added successfully");
                                 break;
                             case 2:
                                 Console.Clear();
                                 DateTime dt = DateTime.Now;
                                 DateTime dtfinal = dt.AddDays(30);
+                                IEnumerable<Slot> slots = emp.getSlotsByDate(dt,dtfinal);
+                                foreach (var slot in slots)
+                                {
+                                    Console.WriteLine("Slot Type: {0} ,\n\t Initial date: {1}, \n\t Final Date: {2} \n\t Description: {3}",
+                                        slot.GetType().Name, slot.Allocated_Start, slot.Allocated_Finish, slot.Description);
+                                }
 
 
                                 break;
+                            case 3:
+                                Console.Clear();
+                                Console.WriteLine("Insert Initial Date by this format: yy,mm,dd,hh");
+                                String start_work = Console.ReadLine();
+                                Console.WriteLine("Insert Final Date by this format: yy,mm,dd,hh");
+                                String finish_work = Console.ReadLine();
+                               emp.getSlotsByDate(emp.PrepareDate(start_work),emp.PrepareDate(finish_work));
+                                foreach (var slot in slots)
+                                { 
+                                    
+                                }
 
                         }
                         
