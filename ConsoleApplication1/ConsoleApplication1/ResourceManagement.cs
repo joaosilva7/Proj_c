@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace ConsoleApplication1
 {
@@ -20,8 +21,12 @@ namespace ConsoleApplication1
 
         public void AddResource(Resource R)
         {
-
             Resources.Add(Increment(), R);
+        }
+
+        public void AddResource(int id, Resource R)
+        {
+            Resources.Add(id, R);
         }
 
         public int Increment()
@@ -44,13 +49,14 @@ namespace ConsoleApplication1
             }      
         }
 
-        public void ListAllManagers()
+        public IEnumerable<Resource> GetList(string type)
         {
-            foreach (var Resource in Resources)
-                if (Resource.Value.GetType() == typeof(Manager))
-                {
-                    Console.WriteLine("  ID: {0}\tName: {1}", Resource.Value._id_Resource, Resource.Value._name);
-                }
+            foreach (var res in Resources)
+            {
+                if (res.Value.GetType().Name == type)
+                    yield return res.Value;
+            }
+           
         }
 
         public void ListAllEmployees()
@@ -61,28 +67,15 @@ namespace ConsoleApplication1
                     Console.WriteLine("  ID: {0}\tName: {1}", Resource.Value._id_Resource, Resource.Value._name);
                 }
         }
-        public void ListEmployeesByManager()
-        {
-            ListAllManagers();
-            Console.WriteLine("Select Manager ID to display his Employees");
-            int ManagerId = Convert.ToInt32(Console.ReadLine());
 
+        public Resource GetResource(int id)
+        {
             Resource man;
-            Resources.TryGetValue(ManagerId, out man);
-            if (man != null)
-            {
-              //  foreach (var Employee in m.EmployeesList)
-              //      Console.WriteLine("  ID: {0}\tName: {1}", Resource.Value._id_Resource, Resource.Value._name);
-            }
-                
+            Resources.TryGetValue(id, out man);
+            return man;
             
         }
 
     }
    
-    public class ResourcesType
-        {
-           public int id;
-           public Resource resource;
-        }
 }
