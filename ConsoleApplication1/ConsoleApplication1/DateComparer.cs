@@ -7,6 +7,8 @@ namespace ConsoleApplication1
 {
     public class DateComparer : IComparer<Slot>
     {
+        public DateComparer() { }
+
         public int Compare(Slot x, Slot y)
         {
             // if they are equal return 0

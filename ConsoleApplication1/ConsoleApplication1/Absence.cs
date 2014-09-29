@@ -9,7 +9,9 @@ namespace ConsoleApplication1
     {
         public enum AbsenceType {Holiday, Sick, NotJustified}
         public AbsenceType _type{get; set;}
-        
+
+
+        public Absence() { }
 
         public Absence(DateTime Start, DateTime Finish, AbsenceType type, String Description = null)
             : base(Start, Finish, Description)

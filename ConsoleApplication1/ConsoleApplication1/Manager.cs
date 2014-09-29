@@ -8,6 +8,8 @@ namespace ConsoleApplication1
     public class Manager : Resource
     {
        public List<Employee> EmployeesList;
+
+       public Manager() { }
         
        public Manager(int idManager, string name, int numHours) : base (idManager, name, numHours)
         {

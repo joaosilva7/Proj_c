@@ -26,6 +26,7 @@ namespace ConsoleApplication1
             {
                 using (TextWriter writer = new StreamWriter(_filename))
                 {
+                    //Work w = new Work(DateTime.Now, DateTime.Now, "yo");
                     serializer = new XmlSerializer(typeof(ResourceManagement));
                     serializer.Serialize(writer, rm);
                 }

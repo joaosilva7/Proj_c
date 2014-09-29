@@ -11,6 +11,8 @@ namespace ConsoleApplication1
 
       public  SortedSet<Slot> slots = new SortedSet<Slot>(new DateComparer());
 
+      public Calendar() { }
+
         public IEnumerable<Slot> FilterBy(Func<Slot,bool> Query)
         {
             return slots.Where(Query);

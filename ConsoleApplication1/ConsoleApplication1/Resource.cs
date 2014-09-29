@@ -12,6 +12,8 @@ namespace ConsoleApplication1
         public int _numHours;       
         public Calendar Calendar { get; set; }
 
+        public Resource() { }
+
         public Resource(int idResource, string name, int numHours) 
         {
             _id_Resource = idResource;

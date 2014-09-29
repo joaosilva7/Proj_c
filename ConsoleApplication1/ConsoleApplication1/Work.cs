@@ -10,6 +10,10 @@ namespace ConsoleApplication1
         DateTime Done_Start { get; set; }
         DateTime Done_Finish { get; set; }
 
+        public Work()
+        {
+        }
+
            public Work(DateTime Start, DateTime Finish, String Description = null) : base( Start, Finish, Description)
         {
            
