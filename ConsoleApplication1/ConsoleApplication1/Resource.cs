@@ -103,5 +103,15 @@ namespace ConsoleApplication1
         {
             return Calendar.FilterByDate(initial,final);
         }
+
+        public IEnumerable<Slot> getWorkSlots(DateTime initial, DateTime final)
+        {
+            return Calendar.FilterByDateAndType(initial, final,"Work");
+        }
+
+        public IEnumerable<Slot> getWorkSlots(DateTime initial, DateTime final)
+        {
+            return Calendar.FilterByDateAndType(initial, final, "Absence");
+        }
     }
 }
